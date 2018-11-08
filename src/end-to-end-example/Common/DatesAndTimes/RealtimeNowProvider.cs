@@ -6,4 +6,4 @@ namespace Common
     {
         public DateTime Now => DateTime.Now;
     }
-}S
+}
