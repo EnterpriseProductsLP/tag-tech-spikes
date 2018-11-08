@@ -1,27 +1,26 @@
 using System;
+using Common.DatesAndTimes;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Common.UnitTests.RealtimeNowProviderTests
+namespace Common.UnitTests.StaticNowProviderTests
 {
     public class WhenReadingNow
     {
+        private static readonly DateTime NOW = new DateTime(2000, 01, 01);
         private DateTime _now;
 
         [SetUp]
         public void Setup()
         {
-            IProvideNow nowProvider = new RealtimeNowProvider();
+            IProvideNow nowProvider = new StaticNowProvider(NOW);
             _now = nowProvider.Now;
         }
 
         [Test]
         public void TheDateAndTimeAreCorrect()
         {
-            var allowedTimeLag = new TimeSpan(0, 0, 0, 1);
-            var actualTimeLag = DateTime.Now - _now;
-            actualTimeLag.Should().BeLessOrEqualTo(allowedTimeLag);
-
+            _now.Should().Be(NOW);
         }
     }
 }
