@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Tests
+namespace Persistence.UnitTests
 {
     public class Tests
     {

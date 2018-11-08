@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace UserService.UnitTests
+namespace WebApi.UnitTests
 {
     public class Tests
     {
