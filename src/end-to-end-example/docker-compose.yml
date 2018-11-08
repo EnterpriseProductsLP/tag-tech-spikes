@@ -7,7 +7,7 @@ services:
     build: ./UserService.Migrations
     container_name: tts-userservice-migrations
     depends_on:
-    - tts-userservice-sqlserver
+      - tts-userservice-sqlserver
     image: enterpriseproductslp/tts/userservice-migrations
 
 
