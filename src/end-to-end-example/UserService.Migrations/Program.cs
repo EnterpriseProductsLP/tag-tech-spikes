@@ -13,7 +13,7 @@ namespace UserService.Migrations
             var csb = new SqlConnectionStringBuilder
             {
                 ApplicationName = "UserService.Migrations",
-                DataSource = ".",
+                DataSource = "tts-userservice-sqlserver",
                 InitialCatalog = "users",
                 MultipleActiveResultSets = false,
                 Password = "yourStrong(!)Password",
