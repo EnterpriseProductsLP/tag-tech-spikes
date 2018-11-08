@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Website\Website.csproj" />
+    <ProjectReference Include="..\Website.React\Website.React.csproj" />
   </ItemGroup>
 
 </Project>

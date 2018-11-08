@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Tests
+namespace Website.Angular.UnitTests
 {
     public class Tests
     {

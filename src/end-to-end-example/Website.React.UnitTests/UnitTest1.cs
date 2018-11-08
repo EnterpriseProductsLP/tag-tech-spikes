@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace UserService.UnitTests
+namespace Website.React.UnitTests
 {
     public class Tests
     {
