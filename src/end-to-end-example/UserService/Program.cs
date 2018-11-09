@@ -2,18 +2,19 @@
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Console;
 
 namespace UserService
 {
-    internal class Program
+    public class Program
     {
-        private static readonly SemaphoreSlim semaphore = new SemaphoreSlim(0);
+        private static SemaphoreSlim semaphore = new SemaphoreSlim(0);
 
         public static async Task Main(string[] args)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                SetConsoleCtrlHandler(ConsoleCtrlCheck, true);
+                DllImports.SetConsoleCtrlHandler(ConsoleCtrlCheck, true);
             }
             else
             {
@@ -50,23 +51,6 @@ namespace UserService
             semaphore.Release();
 
             return true;
-        }
-
-
-        // imports required for a Windows container to successfully notice when a "docker stop" command
-        // has been run and allow for a graceful shutdown of the endpoint
-        [DllImport("Kernel32")]
-        private static extern bool SetConsoleCtrlHandler(HandlerRoutine handler, bool add);
-
-        private delegate bool HandlerRoutine(CtrlTypes ctrlType);
-
-        private enum CtrlTypes
-        {
-            CTRL_C_EVENT = 0,
-            CTRL_BREAK_EVENT = 1,
-            CTRL_CLOSE_EVENT = 2,
-            CTRL_LOGOFF_EVENT = 5,
-            CTRL_SHUTDOWN_EVENT = 6
         }
     }
 }
