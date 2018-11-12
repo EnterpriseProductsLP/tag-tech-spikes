@@ -1,0 +1,23 @@
+version: "3"
+services:
+  # --------------------------------------------------------------------------------------------------------------------
+  # User Service
+  # --------------------------------------------------------------------------------------------------------------------
+  tts-userservice-migrations:
+    build: ./UserService.Migrations
+    container_name: tts-userservice-migrations
+    depends_on:
+      - tts-userservice-sqlserver
+    image: enterpriseproductslp/tts/userservice-migrations
+
+
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # SQL Server
+  # --------------------------------------------------------------------------------------------------------------------
+  tts-userservice-sqlserver:
+    container_name: tts-userservice-sqlserver
+    environment:
+      SA_PASSWORD: yourStrong(!)Password
+      ACCEPT_EULA: Y
+    image: mcr.microsoft.com/mssql/server
