@@ -1,11 +1,12 @@
+using Application.User.Commands;
 using FluentValidation;
 using FluentValidation.Validators;
 
 namespace Application.User.Validations
 {
-    public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+    public class CreateUserValidator : AbstractValidator<CreateUser>
     {
-        public CreateUserCommandValidator()
+        public CreateUserValidator()
         {
             RuleFor(x => x.FirstName).NotEmpty().WithMessage("First name is required.");
 
@@ -24,7 +25,7 @@ namespace Application.User.Validations
                 .NotEmpty().WithMessage("Username is required.");
         }
         
-        private static bool HaveCountryCode(CreateUserCommand model, string phoneValue, PropertyValidatorContext ctx)
+        private static bool HaveCountryCode(CreateUser model, string phoneValue, PropertyValidatorContext ctx)
         {
             return model.Phone.StartsWith("+1");
         }

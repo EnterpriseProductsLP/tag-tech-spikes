@@ -1,11 +1,8 @@
-using System;
-using System.Linq.Expressions;
-using System.Security;
 using MediatR;
 
-namespace Application.User
+namespace Application.User.Commands
 {
-    public class CreateUserCommand : IRequest
+    public class CreateUser : IRequest
     {
         public string Country { get; set; }
 
