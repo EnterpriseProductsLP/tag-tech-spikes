@@ -8,9 +8,9 @@ namespace Domain.Entities.Customer
     {
         public Customer()
         {
-            Order = new HashSet<Order>();
+            Orders = new HashSet<Order>();
         }
 
-        public ICollection<Order> Order { get; }
+        public ICollection<Order> Orders { get; }
     }
 }

@@ -29,6 +29,5 @@ namespace Application.User.Validations
         {
             return model.Phone.StartsWith("+1");
         }
-
     }
 }

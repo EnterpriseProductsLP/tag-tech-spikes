@@ -13,9 +13,9 @@ namespace Application.Infrastructure
 
         public RequestPerformanceBehaviour(ILogger<TRequest> logger)
         {
-            _timer = new Stopwatch();
-
             _logger = logger;
+            
+            _timer = new Stopwatch();
         }
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
