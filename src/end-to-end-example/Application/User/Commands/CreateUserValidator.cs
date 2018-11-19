@@ -7,6 +7,7 @@
 // </copyright>
 
 using Application.User.Commands;
+
 using FluentValidation;
 using FluentValidation.Validators;
 

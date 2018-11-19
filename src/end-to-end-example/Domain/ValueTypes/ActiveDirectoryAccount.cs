@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using Domain.Exceptions;
 
 namespace Domain.ValueTypes
@@ -28,18 +29,18 @@ namespace Domain.ValueTypes
             }
         }
 
-        public string UserName { get; }
-
         public string DomainName { get; }
 
-        public static implicit operator string(ActiveDirectoryAccount adAccount)
-        {
-            return adAccount.ToString();
-        }
+        public string UserName { get; }
 
         public static explicit operator ActiveDirectoryAccount(string value)
         {
             return new ActiveDirectoryAccount(value);
+        }
+
+        public static implicit operator string(ActiveDirectoryAccount adAccount)
+        {
+            return adAccount.ToString();
         }
 
         public override string ToString()

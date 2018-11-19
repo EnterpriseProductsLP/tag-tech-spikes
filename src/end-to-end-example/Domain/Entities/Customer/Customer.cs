@@ -7,6 +7,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+
 using Common.EntityTypes;
 
 namespace Domain.Entities.Customer

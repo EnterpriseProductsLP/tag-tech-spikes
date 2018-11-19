@@ -10,13 +10,14 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Common.Console;
 
 namespace OrderService
 {
     public class Program
     {
-        private static SemaphoreSlim _semaphore = new SemaphoreSlim(0);
+        private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(0);
 
         public static async Task Main(string[] args)
         {
@@ -49,16 +50,16 @@ namespace OrderService
             _semaphore.Release();
         }
 
-        private static void ProcessExit(object sender, EventArgs e)
-        {
-            _semaphore.Release();
-        }
-
         private static bool ConsoleCtrlCheck(CtrlTypes ctrlType)
         {
             _semaphore.Release();
 
             return true;
+        }
+
+        private static void ProcessExit(object sender, EventArgs e)
+        {
+            _semaphore.Release();
         }
     }
 }

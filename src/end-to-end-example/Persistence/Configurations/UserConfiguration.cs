@@ -7,6 +7,7 @@
 // </copyright>
 
 using Domain.Entities.User;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

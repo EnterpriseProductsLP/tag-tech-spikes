@@ -7,8 +7,11 @@
 // </copyright>
 
 using System;
+
 using Common.DatesAndTimes;
+
 using FluentAssertions;
+
 using NUnit.Framework;
 
 namespace Common.UnitTests.StaticNowProviderTests
@@ -16,6 +19,7 @@ namespace Common.UnitTests.StaticNowProviderTests
     public class When_Reading_Now
     {
         private static readonly DateTime Now = new DateTime(2000, 01, 01);
+
         private DateTime _now;
 
         [SetUp]

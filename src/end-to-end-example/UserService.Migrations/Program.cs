@@ -9,6 +9,7 @@
 using System;
 using System.Data.SqlClient;
 using System.Reflection;
+
 using DbUp;
 using DbUp.Engine;
 
@@ -61,11 +62,11 @@ namespace UserService.Migrations
             EnsureDatabase.For.SqlDatabase(connectionString);
 
             var upgradeEngine = DeployChanges
-                .To
-                .SqlDatabase(connectionString)
-                .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
-                .LogToConsole()
-                .Build();
+                                .To
+                                .SqlDatabase(connectionString)
+                                .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
+                                .LogToConsole()
+                                .Build();
 
             return upgradeEngine.PerformUpgrade();
         }
@@ -77,11 +78,13 @@ namespace UserService.Migrations
                 var connectionStringFromArgs = args[1];
                 var connectionStringBuilder = new SqlConnectionStringBuilder(connectionStringFromArgs);
                 connectionString = connectionStringBuilder.ConnectionString;
+
                 return true;
             }
             catch (Exception)
             {
                 connectionString = null;
+
                 return false;
             }
         }

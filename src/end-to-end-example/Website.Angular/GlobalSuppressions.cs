@@ -6,4 +6,6 @@
 // Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
 // </copyright>
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:File name must match first type name", Justification = "This is a Razor Page's View Model.", Scope = "type", Target = "~T:Website.Angular.Pages.ErrorModel")]
+using System.Diagnostics.CodeAnalysis;
+
+[assembly: SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:File name must match first type name", Justification = "This is a Razor Page's View Model.", Scope = "type", Target = "~T:Website.Angular.Pages.ErrorModel")]

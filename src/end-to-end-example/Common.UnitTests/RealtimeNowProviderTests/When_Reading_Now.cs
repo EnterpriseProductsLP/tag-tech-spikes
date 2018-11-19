@@ -7,7 +7,9 @@
 // </copyright>
 
 using System;
+
 using FluentAssertions;
+
 using NUnit.Framework;
 
 namespace Common.UnitTests.RealtimeNowProviderTests
