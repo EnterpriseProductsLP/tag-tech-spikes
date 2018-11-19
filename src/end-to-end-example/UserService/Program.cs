@@ -8,7 +8,7 @@ namespace UserService
 {
     public class Program
     {
-        private static SemaphoreSlim semaphore = new SemaphoreSlim(0);
+        private static SemaphoreSlim _semaphore = new SemaphoreSlim(0);
 
         public static async Task Main(string[] args)
         {
@@ -30,7 +30,7 @@ namespace UserService
             await Console.Out.WriteLineAsync("Press Ctrl+C to exit...");
 
             // wait until notified that the process should exit
-            await semaphore.WaitAsync();
+            await _semaphore.WaitAsync();
 
             await host.Stop();
         }
@@ -38,17 +38,17 @@ namespace UserService
         private static void CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
             e.Cancel = true;
-            semaphore.Release();
+            _semaphore.Release();
         }
 
         private static void ProcessExit(object sender, EventArgs e)
         {
-            semaphore.Release();
+            _semaphore.Release();
         }
 
         private static bool ConsoleCtrlCheck(CtrlTypes ctrlType)
         {
-            semaphore.Release();
+            _semaphore.Release();
 
             return true;
         }

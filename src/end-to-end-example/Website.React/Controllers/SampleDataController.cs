@@ -9,7 +9,7 @@ namespace Website.React.Controllers
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-        private static string[] Summaries = new[]
+        private static string[] _summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
@@ -22,7 +22,7 @@ namespace Website.React.Controllers
             {
                 DateFormatted = DateTime.Now.AddDays(index + startDateIndex).ToString("d"),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                Summary = _summaries[rng.Next(_summaries.Length)]
             });
         }
 

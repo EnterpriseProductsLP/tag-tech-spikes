@@ -11,9 +11,9 @@ namespace UserService
         // TODO: optionally choose a custom logging library
         // https://docs.particular.net/nservicebus/logging/#custom-logging
         // LogManager.Use<TheLoggingFactory>();
-        static readonly ILog log = LogManager.GetLogger<Host>();
+        static readonly ILog Log = LogManager.GetLogger<Host>();
 
-        IEndpointInstance endpoint;
+        IEndpointInstance _endpoint;
 
         // TODO: give the endpoint an appropriate name
         public string EndpointName => "OrderService";
@@ -50,7 +50,7 @@ namespace UserService
                 // TODO: replace the license.xml file with your license file
 
                 // TODO: perform any futher start up operations before or after starting the endpoint
-                endpoint = await Endpoint.Start(endpointConfiguration);
+                _endpoint = await Endpoint.Start(endpointConfiguration);
             }
             catch (Exception ex)
             {
@@ -63,7 +63,7 @@ namespace UserService
             try
             {
                 // TODO: perform any futher shutdown operations before or after stopping the endpoint
-                await endpoint?.Stop();
+                await _endpoint?.Stop();
             }
             catch (Exception ex)
             {
@@ -91,7 +91,7 @@ namespace UserService
         {
             try
             {
-                log.Fatal(message, exception);
+                Log.Fatal(message, exception);
 
                 // TODO: when using an external logging framework it is important to flush any pending entries prior to calling FailFast
                 // https://docs.particular.net/nservicebus/hosting/critical-errors#when-to-override-the-default-critical-error-action

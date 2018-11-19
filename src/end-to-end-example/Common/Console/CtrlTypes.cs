@@ -2,10 +2,10 @@ namespace Common.Console
 {
     public enum CtrlTypes
     {
-        CTRL_C_EVENT = 0,
-        CTRL_BREAK_EVENT = 1,
-        CTRL_CLOSE_EVENT = 2,
-        CTRL_LOGOFF_EVENT = 5,
-        CTRL_SHUTDOWN_EVENT = 6
+        CtrlCEvent = 0,
+        CtrlBreakEvent = 1,
+        CtrlCloseEvent = 2,
+        CtrlLogoffEvent = 5,
+        CtrlShutdownEvent = 6
     }
 }
