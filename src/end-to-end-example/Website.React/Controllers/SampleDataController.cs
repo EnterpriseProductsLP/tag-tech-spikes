@@ -1,7 +1,14 @@
+// <copyright file="SampleDataController.cs" company="Enterprise Products Partners L.P. (Enterprise)">
+// © Copyright 2012 - 2018, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.
+// Permission to use, copy, modify, or distribute this software source code, binaries or
+// related documentation, is strictly prohibited, without written consent from Enterprise.
+// For inquiries about the software, contact Enterprise: Enterprise Products Company Law
+// Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
+// </copyright>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Website.React.Controllers
@@ -29,7 +36,9 @@ namespace Website.React.Controllers
         public class WeatherForecast
         {
             public string DateFormatted { get; set; }
+
             public int TemperatureC { get; set; }
+
             public string Summary { get; set; }
 
             public int TemperatureF

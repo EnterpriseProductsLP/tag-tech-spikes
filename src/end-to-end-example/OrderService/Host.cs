@@ -1,3 +1,11 @@
+// <copyright file="Host.cs" company="Enterprise Products Partners L.P. (Enterprise)">
+// © Copyright 2012 - 2018, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.
+// Permission to use, copy, modify, or distribute this software source code, binaries or
+// related documentation, is strictly prohibited, without written consent from Enterprise.
+// For inquiries about the software, contact Enterprise: Enterprise Products Company Law
+// Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
+// </copyright>
+
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -6,14 +14,14 @@ using NServiceBus.Logging;
 
 namespace OrderService
 {
-    class Host
+    internal class Host
     {
         // TODO: optionally choose a custom logging library
         // https://docs.particular.net/nservicebus/logging/#custom-logging
         // LogManager.Use<TheLoggingFactory>();
-        static readonly ILog Log = LogManager.GetLogger<Host>();
+        private static readonly ILog Log = LogManager.GetLogger<Host>();
 
-        IEndpointInstance _endpoint;
+        private IEndpointInstance _endpoint;
 
         // TODO: give the endpoint an appropriate name
         public string EndpointName => "OrderService";
@@ -71,7 +79,7 @@ namespace OrderService
             }
         }
 
-        async Task OnCriticalError(ICriticalErrorContext context)
+        private async Task OnCriticalError(ICriticalErrorContext context)
         {
             // TODO: decide if stopping the endpoint and exiting the process is the best response to a critical error
             // https://docs.particular.net/nservicebus/hosting/critical-errors
@@ -87,7 +95,7 @@ namespace OrderService
             }
         }
 
-        void FailFast(string message, Exception exception)
+        private void FailFast(string message, Exception exception)
         {
             try
             {
