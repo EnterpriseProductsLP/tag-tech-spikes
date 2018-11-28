@@ -1,19 +1,28 @@
+// <copyright file="Host.cs" company="Enterprise Products Partners L.P. (Enterprise)">
+// © Copyright 2012 - 2018, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.
+// Permission to use, copy, modify, or distribute this software source code, binaries or
+// related documentation, is strictly prohibited, without written consent from Enterprise.
+// For inquiries about the software, contact Enterprise: Enterprise Products Company Law
+// Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
+// </copyright>
+
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+
 using NServiceBus;
 using NServiceBus.Logging;
 
 namespace UserService
 {
-    class Host
+    internal class Host
     {
         // TODO: optionally choose a custom logging library
         // https://docs.particular.net/nservicebus/logging/#custom-logging
         // LogManager.Use<TheLoggingFactory>();
-        static readonly ILog log = LogManager.GetLogger<Host>();
+        private static readonly ILog Log = LogManager.GetLogger<Host>();
 
-        IEndpointInstance endpoint;
+        private IEndpointInstance _endpoint;
 
         // TODO: give the endpoint an appropriate name
         public string EndpointName => "OrderService";
@@ -50,7 +59,7 @@ namespace UserService
                 // TODO: replace the license.xml file with your license file
 
                 // TODO: perform any futher start up operations before or after starting the endpoint
-                endpoint = await Endpoint.Start(endpointConfiguration);
+                _endpoint = await Endpoint.Start(endpointConfiguration);
             }
             catch (Exception ex)
             {
@@ -63,7 +72,7 @@ namespace UserService
             try
             {
                 // TODO: perform any futher shutdown operations before or after stopping the endpoint
-                await endpoint?.Stop();
+                await _endpoint?.Stop();
             }
             catch (Exception ex)
             {
@@ -71,7 +80,22 @@ namespace UserService
             }
         }
 
-        async Task OnCriticalError(ICriticalErrorContext context)
+        private void FailFast(string message, Exception exception)
+        {
+            try
+            {
+                Log.Fatal(message, exception);
+
+                // TODO: when using an external logging framework it is important to flush any pending entries prior to calling FailFast
+                // https://docs.particular.net/nservicebus/hosting/critical-errors#when-to-override-the-default-critical-error-action
+            }
+            finally
+            {
+                Environment.FailFast(message, exception);
+            }
+        }
+
+        private async Task OnCriticalError(ICriticalErrorContext context)
         {
             // TODO: decide if stopping the endpoint and exiting the process is the best response to a critical error
             // https://docs.particular.net/nservicebus/hosting/critical-errors
@@ -84,21 +108,6 @@ namespace UserService
             finally
             {
                 FailFast($"Critical error, shutting down: {context.Error}", context.Exception);
-            }
-        }
-
-        void FailFast(string message, Exception exception)
-        {
-            try
-            {
-                log.Fatal(message, exception);
-
-                // TODO: when using an external logging framework it is important to flush any pending entries prior to calling FailFast
-                // https://docs.particular.net/nservicebus/hosting/critical-errors#when-to-override-the-default-critical-error-action
-            }
-            finally
-            {
-                Environment.FailFast(message, exception);
             }
         }
     }

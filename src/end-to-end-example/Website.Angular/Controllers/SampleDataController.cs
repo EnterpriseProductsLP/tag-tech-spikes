@@ -1,6 +1,15 @@
+// <copyright file="SampleDataController.cs" company="Enterprise Products Partners L.P. (Enterprise)">
+// © Copyright 2012 - 2018, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.
+// Permission to use, copy, modify, or distribute this software source code, binaries or
+// related documentation, is strictly prohibited, without written consent from Enterprise.
+// For inquiries about the software, contact Enterprise: Enterprise Products Company Law
+// Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
+// </copyright>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Website.Angular.Controllers
@@ -17,21 +26,25 @@ namespace Website.Angular.Controllers
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            });
+
+            return Enumerable.Range(1, 5).Select(
+                index => new WeatherForecast
+                {
+                    DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
+                    TemperatureC = rng.Next(-20, 55),
+                    Summary = Summaries[rng.Next(Summaries.Length)]
+                });
         }
 
         public class WeatherForecast
         {
             public string DateFormatted { get; set; }
-            public int TemperatureC { get; set; }
+
             public string Summary { get; set; }
 
-            public int TemperatureF => 32 + (int) (TemperatureC / 0.5556);
+            public int TemperatureC { get; set; }
+
+            public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
         }
     }
 }

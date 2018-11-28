@@ -1,14 +1,23 @@
-﻿using System;
+﻿// <copyright file="Program.cs" company="Enterprise Products Partners L.P. (Enterprise)">
+// © Copyright 2012 - 2018, Enterprise Products Partners L.P. (Enterprise), All Rights Reserved.
+// Permission to use, copy, modify, or distribute this software source code, binaries or
+// related documentation, is strictly prohibited, without written consent from Enterprise.
+// For inquiries about the software, contact Enterprise: Enterprise Products Company Law
+// Department, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.
+// </copyright>
+
+using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Common.Console;
 
 namespace UserService
 {
     public class Program
     {
-        private static SemaphoreSlim semaphore = new SemaphoreSlim(0);
+        private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(0);
 
         public static async Task Main(string[] args)
         {
@@ -30,7 +39,7 @@ namespace UserService
             await Console.Out.WriteLineAsync("Press Ctrl+C to exit...");
 
             // wait until notified that the process should exit
-            await semaphore.WaitAsync();
+            await _semaphore.WaitAsync();
 
             await host.Stop();
         }
@@ -38,19 +47,19 @@ namespace UserService
         private static void CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
             e.Cancel = true;
-            semaphore.Release();
-        }
-
-        private static void ProcessExit(object sender, EventArgs e)
-        {
-            semaphore.Release();
+            _semaphore.Release();
         }
 
         private static bool ConsoleCtrlCheck(CtrlTypes ctrlType)
         {
-            semaphore.Release();
+            _semaphore.Release();
 
             return true;
+        }
+
+        private static void ProcessExit(object sender, EventArgs e)
+        {
+            _semaphore.Release();
         }
     }
 }
